@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ApiGateway/ApiGateway/ApiGateway.iml" filepath="$PROJECT_DIR$/ApiGateway/ApiGateway/ApiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QuestionService/QuestionService/QuestionService.iml" filepath="$PROJECT_DIR$/QuestionService/QuestionService/QuestionService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QuizService/QuizService/QuizService.iml" filepath="$PROJECT_DIR$/QuizService/QuizService/QuizService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceRegistry/ServiceRegistry/ServiceRegistry.iml" filepath="$PROJECT_DIR$/ServiceRegistry/ServiceRegistry/ServiceRegistry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/micro_yt-main.iml" filepath="$PROJECT_DIR$/.idea/micro_yt-main.iml" />
+    </modules>
+  </component>
+</project>
