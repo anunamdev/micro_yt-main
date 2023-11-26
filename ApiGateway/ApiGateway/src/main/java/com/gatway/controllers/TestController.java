@@ -19,4 +19,9 @@ public class TestController {
         return hash;
     }
 
+    @GetMapping("/test")
+    public void test(){
+        System.out.println("This is just a test");
+    }
+
 }
