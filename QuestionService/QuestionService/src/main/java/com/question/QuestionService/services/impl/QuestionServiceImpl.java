@@ -3,9 +3,16 @@ package com.question.QuestionService.services.impl;
 import com.question.QuestionService.entities.Question;
 import com.question.QuestionService.repositories.QuestionRepository;
 import com.question.QuestionService.services.QuestionService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -35,4 +42,32 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuestionsOfQuiz(Long quizId) {
         return questionRepository.findByQuizId(quizId);
     }
+
+    public ResponseEntity<Map> gendata() {
+
+        Random random = new Random(42);
+        HashMap<Integer, String> map = new HashMap<>();
+        // Generate 15,000 SQL INSERT queries
+        for (int i = 11; i <= 15000; i++) {
+            int questionNumber = i;
+            String question = "This is question number " + i + ". What is your answer?";
+            int randomId = generateRandomId(random);
+
+            // Print the SQL INSERT query
+            System.out.println("INSERT INTO quiz_table (question_number, question, random_id) " +
+                    "VALUES (" + questionNumber + ", '" + question + "', " + randomId + ");");
+
+            Question questionObj = new Question((long) questionNumber, question, (random.nextLong(9)));
+            Question saved = questionRepository.save(questionObj);
+            map.put(i, saved.getQuestion());
+        }
+
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
+
+    }
+
+    private static int generateRandomId(Random random) {
+        return random.nextInt(10) + 1;
+    }
+
 }
