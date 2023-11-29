@@ -14,5 +14,5 @@ public interface QuestionService {
 
     List<Question> getQuestionsOfQuiz(Long quizId);
 
-    public ResponseEntity<Map> gendata();
+    ResponseEntity<Map> gendata();
 }

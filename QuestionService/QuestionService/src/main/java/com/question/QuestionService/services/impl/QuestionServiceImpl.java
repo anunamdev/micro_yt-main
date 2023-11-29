@@ -57,7 +57,7 @@ public class QuestionServiceImpl implements QuestionService {
             System.out.println("INSERT INTO quiz_table (question_number, question, random_id) " +
                     "VALUES (" + questionNumber + ", '" + question + "', " + randomId + ");");
 
-            Question questionObj = new Question((long) questionNumber, question, (random.nextLong(9)));
+            Question questionObj = new Question((long)questionNumber, question, (random.nextLong(9)),"Active");
             Question saved = questionRepository.save(questionObj);
             map.put(i, saved.getQuestion());
         }
