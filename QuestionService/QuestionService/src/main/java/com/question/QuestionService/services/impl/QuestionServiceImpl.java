@@ -7,12 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -21,6 +16,10 @@ public class QuestionServiceImpl implements QuestionService {
 
     public QuestionServiceImpl(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
+    }
+
+    private static int generateRandomId(Random random) {
+        return random.nextInt(10) + 1;
     }
 
     @Override
@@ -47,6 +46,8 @@ public class QuestionServiceImpl implements QuestionService {
 
         Random random = new Random(42);
         HashMap<Integer, String> map = new HashMap<>();
+        ArrayList<Question> questions = new ArrayList<>();
+
         // Generate 15,000 SQL INSERT queries
         for (int i = 11; i <= 15000; i++) {
             int questionNumber = i;
@@ -57,17 +58,14 @@ public class QuestionServiceImpl implements QuestionService {
             System.out.println("INSERT INTO quiz_table (question_number, question, random_id) " +
                     "VALUES (" + questionNumber + ", '" + question + "', " + randomId + ");");
 
-            Question questionObj = new Question((long)questionNumber, question, (random.nextLong(9)),"Active");
-            Question saved = questionRepository.save(questionObj);
-            map.put(i, saved.getQuestion());
+            Question questionObj = new Question((long) questionNumber, question, (random.nextLong(9)), "Active");
+//            Question saved = questionRepository.save(questionObj);
+            questions.add(questionObj);
+//            map.put(i, saved.getQuestion());
         }
-
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
-
-    }
-
-    private static int generateRandomId(Random random) {
-        return random.nextInt(10) + 1;
+        questionRepository.saveAll(questions);
+//        return new ResponseEntity<>(map, HttpStatus.CREATED);
+            return null;
     }
 
 }

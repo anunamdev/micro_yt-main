@@ -10,4 +10,5 @@ public class QuestionServiceApplication {
 		SpringApplication.run(QuestionServiceApplication.class, args);
 	}
 
+
 }

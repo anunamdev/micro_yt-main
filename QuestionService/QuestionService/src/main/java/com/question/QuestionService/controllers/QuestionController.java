@@ -6,11 +6,12 @@ import com.question.QuestionService.services.QuestionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +19,10 @@ import java.util.Map;
 @RequestMapping("/question")
 public class QuestionController {
 
-    private static final Logger LOGGER =LoggerFactory.getLogger(QuestionController.class);
-
-    private QuestionService questionService;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuestionController.class);
     @Autowired
     QuestionRepository repository;
+    private QuestionService questionService;
 
     public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
@@ -55,13 +54,14 @@ public class QuestionController {
     }
 
     @GetMapping("/gendata")
-    public ResponseEntity<Map> gendata(){
-        LOGGER.info("date started={}", LocalDate.now());
+    public ResponseEntity<Map> gendata() {
         LOGGER.info("time started={}", LocalTime.now());
-
-        ResponseEntity<Map> data = questionService.gendata();
-        LOGGER.info("date ended={}",LocalDate.now());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("StartTime", LocalTime.now());
+        ResponseEntity<Map> gendataset = questionService.gendata();
         LOGGER.info("time ended={}", LocalTime.now());
+        map.put("End Time", LocalTime.now());
+        ResponseEntity<Map> data = new ResponseEntity<>(map, HttpStatus.CREATED);
         return data;
     }
 
