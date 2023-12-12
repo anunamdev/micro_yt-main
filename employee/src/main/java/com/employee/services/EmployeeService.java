@@ -6,11 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.employee.entities.Employee;
 
-public interface EmployeeService {
-	Employee save(Employee emp);
-	Employee update(Employee emp,Integer empId);
-	List<Employee> view();
-	
-	
+import java.util.List;
 
+public interface EmployeeService {
+    Employee save(Employee emp);
+    Employee update(Employee emp, Integer empId);
+    List<Employee> view();
 }
